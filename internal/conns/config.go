@@ -63,6 +63,7 @@ type Config struct {
 	MaxRetries                     int
 	Profile                        string
 	Region                         string
+	RetryMode                      string
 	S3UsePathStyle                 bool
 	SecretKey                      string
 	SharedConfigFiles              []string
