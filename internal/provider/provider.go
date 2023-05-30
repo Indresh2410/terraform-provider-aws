@@ -74,6 +74,12 @@ func New(ctx context.Context) (*schema.Provider, error) {
 				Description: "Address of the EC2 metadata service endpoint to use. " +
 					"Can also be configured using the `AWS_EC2_METADATA_SERVICE_ENDPOINT` environment variable.",
 			},
+			"retry_mode": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Description: "Retry mode for AWS calls. " +
+					"Can be either `Standard` or `adaptive`. Default is `standard`",
+			},
 			"ec2_metadata_service_endpoint_mode": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -415,6 +421,7 @@ func configure(ctx context.Context, provider *schema.Provider, d *schema.Resourc
 		AccessKey:                      d.Get("access_key").(string),
 		CustomCABundle:                 d.Get("custom_ca_bundle").(string),
 		EC2MetadataServiceEndpoint:     d.Get("ec2_metadata_service_endpoint").(string),
+		RetryMode:                      d.Get("retry_mode").(string),
 		EC2MetadataServiceEndpointMode: d.Get("ec2_metadata_service_endpoint_mode").(string),
 		Endpoints:                      make(map[string]string),
 		HTTPProxy:                      d.Get("http_proxy").(string),
