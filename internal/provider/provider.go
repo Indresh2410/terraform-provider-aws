@@ -74,12 +74,6 @@ func New(ctx context.Context) (*schema.Provider, error) {
 				Description: "Address of the EC2 metadata service endpoint to use. " +
 					"Can also be configured using the `AWS_EC2_METADATA_SERVICE_ENDPOINT` environment variable.",
 			},
-			"retry_mode": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Description: "Retry mode for AWS calls. " +
-					"Can be either `Standard` or `adaptive`. Default is `standard`",
-			},
 			"ec2_metadata_service_endpoint_mode": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -148,6 +142,12 @@ func New(ctx context.Context) (*schema.Provider, error) {
 				Optional: true,
 				Description: "The region where AWS operations will take place. Examples\n" +
 					"are us-east-1, us-west-2, etc.", // lintignore:AWSAT003,
+			},
+			"retry_mode": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Description: "Retry mode for AWS calls. " +
+					"Can be either `standard` or `adaptive`. Default is `standard`",
 			},
 			"s3_use_path_style": {
 				Type:     schema.TypeBool,
