@@ -5,6 +5,7 @@ import (
 	"log"
 	"strings"
 
+	awsRetryMode "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 	"github.com/aws/aws-sdk-go/aws"
@@ -118,6 +119,13 @@ func (c *Config) ConfigureProvider(ctx context.Context, client *AWSClient) (*AWS
 		awsbaseConfig.EC2MetadataServiceEndpointMode = c.EC2MetadataServiceEndpointMode
 	}
 
+	if c.RetryMode != "" {
+		awsbaseConfig.RetryMode = awsRetryMode.RetryMode(c.RetryMode)
+	} else {
+		awsbaseConfig.RetryMode = awsRetryMode.RetryModeStandard
+	}
+
+	
 	if len(c.SharedConfigFiles) != 0 {
 		awsbaseConfig.SharedConfigFiles = c.SharedConfigFiles
 	}
