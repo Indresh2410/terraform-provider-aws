@@ -121,10 +121,7 @@ func (c *Config) ConfigureProvider(ctx context.Context, client *AWSClient) (*AWS
 
 	if c.RetryMode != "" {
 		awsbaseConfig.RetryMode = awsRetryMode.RetryMode(c.RetryMode)
-	} else {
-		awsbaseConfig.RetryMode = awsRetryMode.RetryModeStandard
 	}
-
 	
 	if len(c.SharedConfigFiles) != 0 {
 		awsbaseConfig.SharedConfigFiles = c.SharedConfigFiles
